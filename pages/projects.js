@@ -1,9 +1,16 @@
 import siteMetadata from '@/data/siteMetadata';
 import projectsData from '@/data/projectsData';
+import getProjects from '@/functions/wordpress/getProjects';
 import Card from '@/components/Card';
 import { PageSEO } from '@/components/SEO';
+import JSONPretty from 'react-json-pretty';
+import JSONPrettyTheme from 'react-json-pretty/dist/monikai';
 
-export default function Projects() {
+export async function getStaticProps() {
+  return await getProjects();
+}
+
+export default function Projects({ projects, data }) {
   return (
     <>
       <PageSEO title={`Projects - ${siteMetadata.author}`} description={siteMetadata.description} />
@@ -18,15 +25,18 @@ export default function Projects() {
         </div>
         <div className="container py-12">
           <div className="flex flex-wrap -m-4">
-            {projectsData.map((d) => (
+            {projects.map((d) => (
               <Card
-                key={d.title}
+                key={d.slug}
                 title={d.title}
-                description={d.description}
+                description={d.summary}
                 imgSrc={d.imgSrc}
-                href={d.href}
+                href={d.slug}
               />
             ))}
+            <div className="p-4 md:w-full md">
+              <JSONPretty data={data} theme={JSONPrettyTheme}></JSONPretty>
+            </div>
           </div>
         </div>
       </div>

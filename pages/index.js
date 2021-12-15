@@ -27,6 +27,9 @@ export default function Home({ posts, data }) {
             {siteMetadata.description}
           </p>
         </div>
+        <div className="w-full">
+          <JSONPretty data={data} theme={JSONPrettyTheme}></JSONPretty>
+        </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
           {posts.map((post) => {
@@ -62,7 +65,6 @@ export default function Home({ posts, data }) {
                         </div>
                         <div className="prose text-gray-500 max-w-none dark:text-gray-400">
                           {parse(summary)}
-                          <JSONPretty data={data} theme={JSONPrettyTheme}></JSONPretty>
                         </div>
                       </div>
                       <div className="text-base font-medium leading-6">
