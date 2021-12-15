@@ -4,16 +4,17 @@ import Tag from '@/components/Tag';
 import siteMetadata from '@/data/siteMetadata';
 import getLatestBlogPosts from '@/functions/wordpress/getLatestBlogPosts';
 import formatDate from '@/lib/utils/formatDate';
+import parse from 'html-react-parser';
+import JSONPretty from 'react-json-pretty';
+import JSONPrettyTheme from 'react-json-pretty/dist/monikai';
 
 import NewsletterForm from '@/components/NewsletterForm';
-
-const MAX_DISPLAY = 5;
 
 export async function getStaticProps() {
   return await getLatestBlogPosts();
 }
 
-export default function Home({ posts }) {
+export default function Home({ posts, data }) {
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
@@ -28,8 +29,8 @@ export default function Home({ posts }) {
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
-          {posts.slice(0, MAX_DISPLAY).map((frontMatter) => {
-            const { slug, date, title, summary, tags } = frontMatter;
+          {posts.map((post) => {
+            const { slug, date, title, summary, tags } = post;
             return (
               <li key={slug} className="py-12">
                 <article>
@@ -51,14 +52,17 @@ export default function Home({ posts }) {
                               {title}
                             </Link>
                           </h2>
-                          {/* <div className="flex flex-wrap">
+                          <div className="flex flex-wrap">
                             {tags.map((tag) => (
-                              <Tag key={tag} text={tag} />
+                              <Tag key={tag.slug} slug={tag.slug}>
+                                {tag.name}
+                              </Tag>
                             ))}
-                          </div> */}
+                          </div>
                         </div>
                         <div className="prose text-gray-500 max-w-none dark:text-gray-400">
-                          {summary}
+                          {parse(summary)}
+                          <JSONPretty data={data} theme={JSONPrettyTheme}></JSONPretty>
                         </div>
                       </div>
                       <div className="text-base font-medium leading-6">
@@ -78,17 +82,18 @@ export default function Home({ posts }) {
           })}
         </ul>
       </div>
-      {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base font-medium leading-6">
-          <Link
-            href="/blog"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="all posts"
-          >
-            All Posts &rarr;
-          </Link>
-        </div>
-      )}
+      {/*
+       * It's not a trivial task to count posts in WPGraphQL therefore for now we just always show the All Posts link
+       */}
+      <div className="flex justify-end text-base font-medium leading-6">
+        <Link
+          href="/blog"
+          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          aria-label="all posts"
+        >
+          All Posts &rarr;
+        </Link>
+      </div>
       {siteMetadata.newsletter.provider !== '' && (
         <div className="flex items-center justify-center pt-4">
           <NewsletterForm />
