@@ -4,11 +4,12 @@ import siteMetadata from '@/data/siteMetadata';
 import { useState } from 'react';
 import Pagination from '@/components/Pagination';
 import formatDate from '@/lib/utils/formatDate';
+import parse from 'html-react-parser';
 
 export default function ListLayout({ posts, title, initialDisplayPosts = [], pagination }) {
   const [searchValue, setSearchValue] = useState('');
   const filteredBlogPosts = posts.filter((frontMatter) => {
-    const searchContent = frontMatter.title + frontMatter.summary + frontMatter.tags.join(' ');
+    const searchContent = frontMatter.node.title + frontMatter.node.excerpt;
     return searchContent.toLowerCase().includes(searchValue.toLowerCase());
   });
 
@@ -50,7 +51,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
         <ul>
           {!filteredBlogPosts.length && 'No posts found.'}
           {displayPosts.map((frontMatter) => {
-            const { slug, date, title, summary, tags } = frontMatter;
+            const { slug, date, title, excerpt, tags } = frontMatter.node;
             return (
               <li key={slug} className="py-4">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
@@ -68,13 +69,15 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                         </Link>
                       </h3>
                       <div className="flex flex-wrap">
-                        {tags.map((tag) => (
-                          <Tag key={tag} text={tag} />
+                        {tags.edges.map((t) => (
+                          <Tag key={t.node.slug} slug={t.node.slug}>
+                            {t.node.name}
+                          </Tag>
                         ))}
                       </div>
                     </div>
                     <div className="prose text-gray-500 max-w-none dark:text-gray-400">
-                      {summary}
+                      {parse(excerpt)}
                     </div>
                   </div>
                 </article>
