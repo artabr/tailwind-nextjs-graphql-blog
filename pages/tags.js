@@ -12,7 +12,6 @@ export async function getStaticProps() {
 }
 
 export default function Tags({ tags }) {
-  console.log(tags);
   // const sortedTags = Object.keys(tags).sort((a, b) => tags[b] - tags[a]);
   return (
     <>

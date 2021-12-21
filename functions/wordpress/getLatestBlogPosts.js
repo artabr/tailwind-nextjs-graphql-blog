@@ -7,22 +7,7 @@ const getLatestBlogPosts = async (postCount = 5) => {
     variables: { first: postCount },
   });
 
-  return {
-    props: {
-      posts: data.posts.edges.map((post) => {
-        const { slug, date, title, excerpt, tags } = post.node;
-
-        return {
-          slug,
-          date,
-          title,
-          summary: excerpt,
-          tags: tags.edges.map((tag) => ({ name: tag.node.name, slug: tag.node.slug })),
-        };
-      }),
-      data,
-    },
-  };
+  return data;
 };
 
 export default getLatestBlogPosts;

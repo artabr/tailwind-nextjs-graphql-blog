@@ -11,7 +11,24 @@ import JSONPrettyTheme from 'react-json-pretty/dist/monikai';
 import NewsletterForm from '@/components/NewsletterForm';
 
 export async function getStaticProps() {
-  return await getLatestBlogPosts();
+  const data = await getLatestBlogPosts();
+
+  return {
+    props: {
+      posts: data.posts.edges.map((post) => {
+        const { slug, date, title, excerpt, tags } = post.node;
+
+        return {
+          slug,
+          date,
+          title,
+          summary: excerpt,
+          tags: tags.edges.map((tag) => ({ name: tag.node.name, slug: tag.node.slug })),
+        };
+      }),
+      data,
+    },
+  };
 }
 
 export default function Home({ posts, data }) {

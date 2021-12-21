@@ -20,8 +20,6 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const posts = await getPostsByTag(params.tag);
 
-  console.log(posts.tag.posts.edges);
-
   return { props: { posts: posts.tag.posts.edges, tag: params.tag } };
 }
 

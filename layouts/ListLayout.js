@@ -9,7 +9,7 @@ import parse from 'html-react-parser';
 export default function ListLayout({ posts, title, initialDisplayPosts = [], pagination }) {
   const [searchValue, setSearchValue] = useState('');
   const filteredBlogPosts = posts.filter((frontMatter) => {
-    const searchContent = frontMatter.node.title + frontMatter.node.excerpt;
+    const searchContent = frontMatter.title + frontMatter.excerpt;
     return searchContent.toLowerCase().includes(searchValue.toLowerCase());
   });
 
@@ -51,7 +51,8 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
         <ul>
           {!filteredBlogPosts.length && 'No posts found.'}
           {displayPosts.map((frontMatter) => {
-            const { slug, date, title, excerpt, tags } = frontMatter.node;
+            const { slug, date, title, excerpt, tags } = frontMatter;
+            console.log(frontMatter);
             return (
               <li key={slug} className="py-4">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
@@ -69,16 +70,14 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                         </Link>
                       </h3>
                       <div className="flex flex-wrap">
-                        {tags.edges.map((t) => (
-                          <Tag key={t.node.slug} slug={t.node.slug}>
-                            {t.node.name}
+                        {tags?.map((t) => (
+                          <Tag key={t.slug} slug={t.slug}>
+                            {t.name}
                           </Tag>
                         ))}
                       </div>
                     </div>
-                    <div className="prose text-gray-500 max-w-none dark:text-gray-400">
-                      {parse(excerpt)}
-                    </div>
+                    <div className="prose text-gray-500 max-w-none dark:text-gray-400"></div>
                   </div>
                 </article>
               </li>

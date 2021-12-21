@@ -4,7 +4,6 @@ import getPageById from '@/functions/wordpress/getPageById';
 export async function getStaticProps() {
   const userDetails = await getPageById('about');
 
-  console.log(userDetails.page.author.node);
   const { name, email, description, avatar } = userDetails.page.author.node;
 
   const authorDetails = {
@@ -17,8 +16,6 @@ export async function getStaticProps() {
     linkedin: 'https://www.linkedin.com',
     github: 'https://github.com',
   };
-
-  console.log(authorDetails);
 
   return { props: { authorDetails, description } };
 }

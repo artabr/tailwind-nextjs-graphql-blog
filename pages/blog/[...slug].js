@@ -27,8 +27,6 @@ export async function getStaticProps({ params }) {
   const prev = null;
   const next = null;
 
-  console.log(params.slug);
-
   const authorDetails = [];
 
   const response = await getPostTypeById('post', params.slug.join(''));
