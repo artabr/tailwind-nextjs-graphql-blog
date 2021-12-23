@@ -5,8 +5,6 @@ import siteMetadata from '@/data/siteMetadata';
 import getLatestBlogPosts from '@/functions/wordpress/getLatestBlogPosts';
 import formatDate from '@/lib/utils/formatDate';
 import parse from 'html-react-parser';
-import JSONPretty from 'react-json-pretty';
-import JSONPrettyTheme from 'react-json-pretty/dist/monikai';
 
 import NewsletterForm from '@/components/NewsletterForm';
 
@@ -43,9 +41,6 @@ export default function Home({ posts, data }) {
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             {siteMetadata.description}
           </p>
-        </div>
-        <div className="w-full">
-          <JSONPretty data={data} theme={JSONPrettyTheme}></JSONPretty>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}

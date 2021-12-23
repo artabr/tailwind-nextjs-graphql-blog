@@ -4,6 +4,8 @@ import ListLayout from '@/layouts/ListLayout';
 import getAllTags from '@/functions/wordpress/getAllTags';
 import getPostsByTag from '@/functions/wordpress/getPostsByTag';
 
+export const POSTS_PER_PAGE = 5;
+
 export async function getStaticPaths() {
   const tags = await getAllTags();
 
@@ -18,9 +20,35 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const posts = await getPostsByTag(params.tag);
+  const data = await getPostsByTag(params.tag);
 
-  return { props: { posts: posts.tag.posts.edges, tag: params.tag } };
+  const posts = data.tag.posts.edges.map((post) => {
+    const { slug, date, title, excerpt, tags } = post.node;
+
+    return {
+      slug,
+      date,
+      title,
+      excerpt,
+      tags: tags.edges.map((tag) => ({ name: tag.node.name, slug: tag.node.slug })),
+    };
+  });
+
+  const initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE);
+  const pagination = {
+    currentPage: 1,
+    totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
+  };
+
+  return {
+    props: {
+      initialDisplayPosts,
+      posts,
+      pagination,
+      data,
+      tag: params.tag,
+    },
+  };
 }
 
 export default function Tag({ posts, tag }) {

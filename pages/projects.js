@@ -3,8 +3,6 @@ import projectsData from '@/data/projectsData';
 import getProjects from '@/functions/wordpress/getProjects';
 import Card from '@/components/Card';
 import { PageSEO } from '@/components/SEO';
-import JSONPretty from 'react-json-pretty';
-import JSONPrettyTheme from 'react-json-pretty/dist/monikai';
 
 export async function getStaticProps() {
   return await getProjects();
@@ -34,9 +32,6 @@ export default function Projects({ projects, data }) {
                 href={d.slug}
               />
             ))}
-            <div className="p-4 md:w-full md">
-              <JSONPretty data={data} theme={JSONPrettyTheme}></JSONPretty>
-            </div>
           </div>
         </div>
       </div>
