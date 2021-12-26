@@ -1,5 +1,4 @@
 import siteMetadata from '@/data/siteMetadata';
-import projectsData from '@/data/projectsData';
 import getProjects from '@/functions/wordpress/getProjects';
 import Card from '@/components/Card';
 import { PageSEO } from '@/components/SEO';
