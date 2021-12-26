@@ -2,7 +2,7 @@ import AuthorLayout from '@/layouts/AuthorLayout';
 import getPageById from '@/functions/wordpress/getPageById';
 
 export async function getStaticProps() {
-  const userDetails = await getPageById('about');
+  const userDetails = await getPageById('sample-page');
 
   const { name, email, description, avatar } = userDetails.page.author.node;
 
