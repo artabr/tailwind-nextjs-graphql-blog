@@ -1,13 +1,13 @@
 import PageTitle from '@/components/PageTitle';
 import PostSimple from '@/layouts/PostSimple';
-import getPostTypeById from '@/functions/wordpress/getPostTypeById';
+import getProjectById from '@/functions/wordpress/getProjectById';
 import parse from 'html-react-parser';
 import client from '@/lib/apollo-client';
-import queryPostsSlugs from '@/lib/wordpress/projects/queryProjectsSlugs';
+import queryProjectsSlugs from '@/lib/wordpress/projects/queryProjectsSlugs';
 
 export async function getStaticPaths() {
   const { data } = await client.query({
-    query: queryPostsSlugs,
+    query: queryProjectsSlugs,
     variables: { first: 25 },
   });
 
@@ -27,7 +27,9 @@ export async function getStaticProps({ params }) {
 
   const authorDetails = [];
 
-  const response = await getPostTypeById('project', params.slug.join(''));
+  const response = await getProjectById(params.slug.join(''));
+
+  console.log(response);
 
   const { project } = response;
 
