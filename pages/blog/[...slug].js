@@ -48,25 +48,9 @@ export default function Blog({ post, authorDetails, prev, next }) {
   return (
     <>
       {post.status == 'publish' ? (
-        // <MDXLayoutRenderer
-        //   layout={frontMatter.layout || DEFAULT_LAYOUT}
-        //   toc={toc}
-        //   mdxSource={mdxSource}
-        //   frontMatter={frontMatter}
-        //   authorDetails={authorDetails}
-        //   prev={prev}
-        //   next={next}
-        // />
-        <>
-          <PostLayout
-            frontMatter={frontMatter}
-            authorDetails={authorDetails}
-            next={next}
-            prev={prev}
-          >
-            {parse(post.content)}
-          </PostLayout>
-        </>
+        <PostLayout frontMatter={frontMatter} authorDetails={authorDetails} next={next} prev={prev}>
+          {parse(post.content)}
+        </PostLayout>
       ) : (
         <div className="mt-24 text-center">
           <PageTitle>

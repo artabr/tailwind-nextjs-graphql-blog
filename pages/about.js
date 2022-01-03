@@ -1,10 +1,13 @@
-import AuthorLayout from '@/layouts/AuthorLayout';
+import PostSimple from '@/layouts/PostSimple';
 import getPageById from '@/functions/wordpress/getPageById';
+import parse from 'html-react-parser';
 
 export async function getStaticProps() {
-  const userDetails = await getPageById('sample-page');
+  const { page } = await getPageById('sample-page');
 
-  const { name, email, description, avatar } = userDetails.page.author.node;
+  console.log(page);
+
+  const { name, email, description, avatar } = page.author.node;
 
   const authorDetails = {
     name,
@@ -17,9 +20,20 @@ export async function getStaticProps() {
     github: 'https://github.com',
   };
 
-  return { props: { authorDetails, description } };
+  return { props: { page, authorDetails, description } };
 }
 
-export default function About({ authorDetails, description }) {
-  return <AuthorLayout frontMatter={authorDetails}>{description}</AuthorLayout>;
+export default function About({ page, authorDetails }) {
+  const frontMatter = {
+    slug: page.slug,
+    fileName: '',
+    date: page.date,
+    title: page.title,
+  };
+
+  return (
+    <PostSimple frontMatter={frontMatter} authorDetails={authorDetails}>
+      {parse(page.content)}
+    </PostSimple>
+  );
 }

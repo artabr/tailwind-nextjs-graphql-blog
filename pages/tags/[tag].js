@@ -1,5 +1,5 @@
 import { TagSEO } from '@/components/SEO';
-// import siteMetadata from '@/data/siteMetadata';
+import siteMetadata from '@/data/siteMetadata';
 import ListLayout from '@/layouts/ListLayout';
 import getAllTags from '@/functions/wordpress/getAllTags';
 import getPostsByTag from '@/functions/wordpress/getPostsByTag';
@@ -57,10 +57,8 @@ export default function Tag({ posts, tag }) {
   return (
     <>
       <TagSEO
-        // title={`${tag} - ${siteMetadata.author}`}
-        // description={`${tag} tags - ${siteMetadata.author}`}
-        title="SEO Title"
-        description="SEO Description"
+        title={`${title} - ${siteMetadata.author}`}
+        description={`${title} tags - ${siteMetadata.author}`}
       />
       <ListLayout posts={posts} title={title} />
     </>

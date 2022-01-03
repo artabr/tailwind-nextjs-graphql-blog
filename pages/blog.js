@@ -1,25 +1,12 @@
 import siteMetadata from '@/data/siteMetadata';
 import ListLayout from '@/layouts/ListLayout';
 import { PageSEO } from '@/components/SEO';
-import getLatestBlogPosts from '@/functions/wordpress/getLatestBlogPosts';
+import getAllBlogPosts from '@/functions/wordpress/getAllBlogPosts';
 
 export const POSTS_PER_PAGE = 5;
 
 export async function getStaticProps() {
-  const data = await getLatestBlogPosts(25);
-
-  const posts = data.posts.edges.map((post) => {
-    const { slug, date, title, excerpt, tags } = post.node;
-
-    return {
-      slug,
-      date,
-      title,
-      excerpt,
-      tags: tags.edges.map((tag) => ({ name: tag.node.name, slug: tag.node.slug })),
-    };
-  });
-
+  const posts = await getAllBlogPosts();
   const initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE);
   const pagination = {
     currentPage: 1,
@@ -28,10 +15,9 @@ export async function getStaticProps() {
 
   return {
     props: {
-      initialDisplayPosts,
       posts,
+      initialDisplayPosts,
       pagination,
-      data,
     },
   };
 }
