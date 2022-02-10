@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1660 830" style="enable-background:new 0 0 1660 830;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{font-family:'Inter-Bold';}
+	.st2{font-size:75.422px;}
+	.st3{fill-rule:evenodd;clip-rule:evenodd;fill:#E10098;}
+	.st4{fill:#E10098;}
+	.st5{fill:url(#aFZf6T5ED_2_);}
+	.st6{fill:url(#a9fehgwfM_2_);}
+</style>
+<rect class="st0" width="1660" height="830"/>
+<text transform="matrix(1 0 0 1 591.356 448.4629)" class="st1 st2">Tailwind+GraphQL Blog</text>
+<g>
+	<path class="st3" d="M468.42,345.44l60.76,35.08v70.16l-60.76,35.08l-60.76-35.08v-70.16L468.42,345.44z M414.14,384.6v51.29
+		l44.42-76.93L414.14,384.6z M468.63,356.73l-51.2,88.69h102.41L468.63,356.73z M513.05,451.9h-88.84l44.42,25.64L513.05,451.9z
+		 M522.7,435.89l-44.42-76.93l44.42,25.64V435.89z"/>
+	<circle class="st4" cx="468.63" cy="349.69" r="14.29"/>
+	<circle class="st4" cx="525.71" cy="382.64" r="14.29"/>
+	<circle class="st4" cx="525.71" cy="448.55" r="14.29"/>
+	<circle class="st4" cx="468.63" cy="481.5" r="14.29"/>
+	<circle class="st4" cx="411.54" cy="448.55" r="14.29"/>
+	<circle class="st4" cx="411.54" cy="382.64" r="14.29"/>
+</g>
+<g>
+	<g>
+		<g>
+			<g>
+				
+					<linearGradient id="aFZf6T5ED_2_" gradientUnits="userSpaceOnUse" x1="125.1522" y1="1744.0754" x2="125.1522" y2="1474.9507" gradientTransform="matrix(0.4781 0 0 -0.4781 244.4743 1186.4296)">
+					<stop  offset="0" style="stop-color:#06B6D4"/>
+					<stop  offset="1" style="stop-color:#67E8F9"/>
+				</linearGradient>
+				<path id="aFZf6T5ED_1_" class="st5" d="M352,352.61v42.15l-95.38,86.52V436.9L352,352.61z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				
+					<linearGradient id="a9fehgwfM_2_" gradientUnits="userSpaceOnUse" x1="-10.0023" y1="1744.0546" x2="-10.0023" y2="1474.9716" gradientTransform="matrix(0.4781 0 0 -0.4781 244.4743 1186.4296)">
+					<stop  offset="0" style="stop-color:#06B6D4"/>
+					<stop  offset="1" style="stop-color:#67E8F9"/>
+				</linearGradient>
+				<path id="a9fehgwfM_1_" class="st6" d="M287.38,352.62v42.14L192,481.27V436.9L287.38,352.62z"/>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>
